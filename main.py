@@ -1,10 +1,13 @@
-zmienna_1:str = "Karolina"
-zmienna_2:str = "Tomek"
-zmienna_3:str = "Jacek"
-zmienna_4:str = "Piotr"
-
-
-#przerób istniejący kod żeby użytkownicy wyśweitlali się w pętli
-uzytkownicy:list = [zmienna_1, zmienna_2, zmienna_3, zmienna_4]
-for uzytkownik in uzytkownicy:
-    print(f"Hello {uzytkownik} ")
+users:list = [
+    {"name": "Karolina",
+     "location": "Kraśnik",
+     "posts": "100" },
+    {"name": "Tomek",
+     "location": "Warszawa",
+     "posts": "50" },
+    { "name": "Jacek",
+      "location": "Londyn",
+      "posts": "10" },
+]
+for user in users:
+    print(f"Twój znajomy {user["name"]} z miejscowości {user["location"]} opublikował {user["posts"]} postów")
