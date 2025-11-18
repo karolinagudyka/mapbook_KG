@@ -1,37 +1,99 @@
-from mapbook_lib.controller import user_info, add_user, remove_user, update_user, get_map
-from mapbook_lib.model import users
+from tkinter import *
+import tkintermapview
 
-def main():
-    while True:
-        print("============================MENU=================================")
-        print("0. Wyjście z programu")
-        print("1. Wyświetlanie aktywności znajomych")
-        print("2. Dodawanie znajomego")
-        print("3. Usuwanie znajomego")
-        print("4. Aktualizacja danych znajomych")
-        print("5. Generowanie mapy")
-        print("=================================================================")
-        tmp_choice:int=int(input("Wybierz opcję menu: "))
-        if tmp_choice==0:
-            break
-        if tmp_choice==1:
-            print("Wybrano funkcję wyświetlania aktywności znajomych")
-            user_info(users)
-        if tmp_choice==2:
-            print("Wybrano funkcję dodawania znajomego")
-            add_user(users)
-            print(users)
-        if tmp_choice==3:
-            print("Wybrano funkcję usuwania znajomego")
-            remove_user(users)
-            print(users)
-        if tmp_choice==4:
-            print("Wybrano funkcję aktualizacji danych znajomego")
-            update_user(users)
-            print(users)
-        if tmp_choice==5:
-            print("Wybrano funkcję wyświetlania mapy")
-            get_map(users)
+root = Tk()
+root.title("Mapbook")
+root.geometry("1025x760")
 
-if __name__ == "__main__":
-    main()
+ramka_lista_obiektow = Frame(root)
+ramka_formularz = Frame(root)
+ramka_szczegoly_obiektu = Frame(root)
+ramka_mapa = Frame(root)
+
+ramka_lista_obiektow.grid(row=0, column=0)
+ramka_formularz.grid(row=0, column=1)
+ramka_szczegoly_obiektu.grid(row=1, column=0)
+ramka_mapa.grid(row=2, column=0)
+
+# RAMKA_LISTA_OBIEKTÓW
+label_lista_obiektow = Label(ramka_lista_obiektow, text="Lista obiektów")
+label_lista_obiektow.grid(row=0, column=0, columnspan=3)
+
+list_box_lista_obiektów = Listbox(ramka_lista_obiektow)
+list_box_lista_obiektów.grid(row=1, column=0, columnspan=3)
+
+buttom_pokaz_szczegoly = Button(ramka_lista_obiektow, text="Pokaż szczegóły")
+buttom_pokaz_szczegoly.grid(row=2, column=0)
+
+buttom_usun_obiekt = Button(ramka_lista_obiektow, text="Usuń obiekt")
+buttom_usun_obiekt.grid(row=2, column=1)
+
+buttom_edytuj_obiekt = Button(ramka_lista_obiektow, text="Edytuj obiekt")
+buttom_edytuj_obiekt.grid(row=2, column=2)
+
+
+
+#RAMKA FORMULARZ
+label_formularz = Label(ramka_formularz, text="Formularz: ")
+label_formularz.grid(row=0, column=0, columnspan=2)
+
+label_imie = Label(ramka_formularz, text= "Imie: ")
+label_imie.grid(row=1, column=0, sticky=W)
+
+label_lokalizacja = Label(ramka_formularz, text="Lokalizacja: ")
+label_lokalizacja.grid(row=2, column=0, sticky=W)
+
+label_posty = Label(ramka_formularz, text="Posty: ")
+label_posty.grid(row=3, column=0, sticky=W)
+
+label_img_url = Label(ramka_formularz, text="Obrazek: ")
+label_img_url.grid(row=4, column=0, sticky=W)
+
+entry_name = Entry(ramka_formularz)
+entry_name.grid(row=1, column=1)
+
+entry_lokalizacja = Entry(ramka_formularz)
+entry_lokalizacja.grid(row=2, column=1)
+
+entry_posty = Entry(ramka_formularz)
+entry_posty.grid(row=3, column=1)
+
+entry_img_url = Entry(ramka_formularz)
+entry_img_url.grid(row=4, column=1)
+
+button_dodaj_obiekt = Button(ramka_formularz, text="Dodaj obiekt")
+button_dodaj_obiekt.grid(row=5, column=0, columnspan=2)
+
+
+
+# RAMKA SZCZEGÓŁY OBIEKTU
+label_szczegoly_obiektu = Label(ramka_szczegoly_obiektu, text="Szczegóły obiektu: ")
+label_szczegoly_obiektu.grid(row=0, column=0, sticky=W)
+
+label_imie_szczegoly_obiektu = Label(ramka_szczegoly_obiektu, text= "Imie: ")
+label_imie_szczegoly_obiektu.grid(row=1, column=0)
+
+label_imie_szczegoly_obiektu_wartosc = Label(ramka_szczegoly_obiektu, text="...")
+label_imie_szczegoly_obiektu_wartosc.grid(row=1, column=1)
+
+label_lokalizacja_szczegoly_obiektu = Label(ramka_szczegoly_obiektu, text="Lokalizacja: ")
+label_lokalizacja_szczegoly_obiektu.grid(row=1, column=3)
+
+label_lokalizacja_szczegoly_obiektu_wartosc = Label(ramka_szczegoly_obiektu, text="...")
+label_lokalizacja_szczegoly_obiektu_wartosc.grid(row=1, column=4)
+
+label_posty_szczegoly_obiektu = Label(ramka_szczegoly_obiektu, text= "Posty: ")
+label_posty_szczegoly_obiektu.grid(row=1, column=5)
+
+label_posty_szczegoly_obiektu_wartosc = Label(ramka_szczegoly_obiektu, text="...")
+label_posty_szczegoly_obiektu_wartosc.grid(row=1, column=6)
+
+
+# RAMKA MAPY
+map_widget = tkintermapview.TkinterMapView(ramka_mapa, width=1025, height=600, corner_radius=0)
+map_widget.set_position(52.0, 21.0)
+map_widget.set_zoom(6)
+map_widget.grid(row=0, column=0)
+
+
+root.mainloop()
